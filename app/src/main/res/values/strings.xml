@@ -2,4 +2,7 @@
     <string name="app_name">IOKO.JUEGA</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="main_message_uri_null">"error "</string>
+    <string name="main_message_upload_error">erroal guardar imagen</string>
+    <string name="main_message_error_notfound">error al eliminar</string>
 </resources>

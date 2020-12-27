@@ -2,54 +2,60 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/mnTopJuegos"
+        android:id="@+id/mnTopProductos"
         style="@style/Widget.Ebony.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Top Juegos" />
+        android:text="Top Juegos"
+        android:onClick="onClick"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/mnTopRankeado"
+        android:id="@+id/mnTopRated"
         style="@style/Widget.Ebony.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lo mas rankeado" />
+        android:text="Lo mas Rateado"
+        android:onClick="onClick"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mnFreeToPlay"
         style="@style/Widget.Ebony.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Free to Play" />
+        android:text="Free to Play"
+        android:onClick="onClick"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mnOldSchool"
         style="@style/Widget.Ebony.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="La Vieja Escuela" />
+        android:text="La Vieja Escuela"
+        android:onClick="onClick"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mnCategorias"
         style="@style/Widget.Ebony.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Categorias" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/mnAjustes"
-        style="@style/Widget.Ebony.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mis juegos"
-        android:visibility="visible" />
+        android:text="Categorias"
+        android:onClick="onClick"/>
 
     <View
         android:layout_width="56dp"
         android:layout_height="1dp"
         android:layout_margin="16dp"
         android:background="?android:attr/textColorPrimary"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:onClick="onClick"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mnMisJuegos"
+        style="@style/Widget.Ebony.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mis juegos"
+        android:onClick="onClick"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mnPerfil"
@@ -57,6 +63,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Perfil"
-        android:visibility="visible" />
+        android:onClick="onClick"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mnAdministrar"
+        style="@style/Widget.Ebony.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Administrar"
+        android:onClick="onClick"/>
 
 </merge>

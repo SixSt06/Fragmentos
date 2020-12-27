@@ -3,10 +3,6 @@ package com.sixst06.fragmentos.gui;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,12 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.Button;
-import android.widget.LinearLayout;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -30,8 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sixst06.fragmentos.R;
-import com.sixst06.fragmentos.databinding.FragmentTopJuegosBinding;
-import com.sixst06.fragmentos.gui.components.JuegosAdapter;
+import com.sixst06.fragmentos.databinding.FragmentAdministrarBinding;
+import com.sixst06.fragmentos.gui.components.AdministrarAdapter;
 import com.sixst06.fragmentos.gui.components.NavigationHost;
 import com.sixst06.fragmentos.gui.components.NavigationIconClickListener;
 import com.sixst06.fragmentos.model.Juego;
@@ -39,9 +32,9 @@ import com.sixst06.fragmentos.model.Juego;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TopJuegos extends Fragment {
+public class Administrar extends Fragment {
 
-    private FragmentTopJuegosBinding binding;
+    private FragmentAdministrarBinding binding;
     private View view;
     private Context context;
     private List<Juego> juegos = new ArrayList<>();
@@ -50,7 +43,8 @@ public class TopJuegos extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);//Modificar Topbar
+        setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -62,15 +56,22 @@ public class TopJuegos extends Fragment {
         configgUI();
         configRecycler();
 
+        binding.fabCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((NavigationHost)getActivity()).navigateTo(new AddFragment(), true);
+            }
+        });
+
         return view;
     }
 
     private void configGlobals() {
-        MainActivity.GLOBALS.put("topJuegosFragment", this);
+        MainActivity.GLOBALS.put("administrarFragment", this);
     }
 
     private void configView(LayoutInflater inflater, ViewGroup container) {
-        binding = FragmentTopJuegosBinding.inflate(inflater,container,false);
+        binding = FragmentAdministrarBinding.inflate(inflater,container,false);
         view = binding.getRoot();
         context = container.getContext();
     }
@@ -82,7 +83,7 @@ public class TopJuegos extends Fragment {
         }
         binding.appBar.setNavigationOnClickListener(new NavigationIconClickListener(
                 context,
-                view.findViewById(R.id.gridTopGames),
+                view.findViewById(R.id.gridAdministrar),
                 new AccelerateDecelerateInterpolator(),
                 context.getDrawable(R.drawable.menu),
                 context.getDrawable(R.drawable.menu_open)
@@ -91,55 +92,54 @@ public class TopJuegos extends Fragment {
 
     private void configgUI() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            view.findViewById(R.id.gridTopGames).setBackground(getContext().getDrawable(R.drawable.product_grid_background_shape));
+            view.findViewById(R.id.gridAdministrar).setBackground(getContext().getDrawable(R.drawable.product_grid_background_shape));
         }
     }
 
     private void configRecycler() {
-
-        binding.rclvTopJuegos.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false);
-        binding.rclvTopJuegos.setLayoutManager(layoutManager);
-        binding.rclvTopJuegos.setAdapter(new JuegosAdapter(juegos));
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference(PATH_TOP);
 
         reference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Juego juego  = dataSnapshot.getValue(Juego.class);
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Juego juego = snapshot.getValue(Juego.class);
 
                 if (!juegos.contains(juego)) {
                     juegos.add(juego);
                 }
-                binding.rclvTopJuegos.getAdapter().notifyDataSetChanged();
+                binding.rclvAdministrar.getAdapter().notifyDataSetChanged();
             }
 
             @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Juego juego = dataSnapshot.getValue(Juego.class);
-                juegos.set(juegos.indexOf(juego) ,juego);
-                binding.rclvTopJuegos.getAdapter().notifyDataSetChanged();
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Juego juego = snapshot.getValue(Juego.class);
+                if (juego != null) {
+                    Log.i("juego", "onChildChanged: " + juego.getIdJuego());
+                }
 
+                juegos.set(juegos.indexOf(juego), juego);
+                binding.rclvAdministrar.getAdapter().notifyDataSetChanged();
             }
 
             @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                Juego juego = dataSnapshot.getValue(Juego.class);
-                juegos.remove(juego);
-                binding.rclvTopJuegos.getAdapter().notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
 
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
+        binding.rclvAdministrar.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL,false);
+        binding.rclvAdministrar.setLayoutManager(layoutManager);
+        binding.rclvAdministrar.setAdapter(new AdministrarAdapter(juegos));
     }
 }

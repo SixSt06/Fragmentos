@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    android:elevation="5dp"
+    app:cardElevation="5dp"
+    android:layout_gravity="center"
+    android:layout_margin="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imgJuego"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="8dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="30dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Titulo"
+            android:textAppearance="?attr/textAppearanceHeadline4"
+            android:id="@+id/txtTitulo"
+            android:layout_toRightOf="@id/imgJuego"
+            android:layout_marginLeft="8dp"
+            android:textSize="25sp"
+            android:layout_marginTop="15dp"/>
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="0"
+            android:id="@+id/rbClasificacion"
+            android:layout_toRightOf="@id/imgJuego"
+            android:layout_below="@id/txtTitulo"
+            android:scaleX="0.6"
+            android:scaleY="0.6"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripcion"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:id="@+id/txtDescripcion"
+            android:layout_below="@id/rbClasificacion"
+            android:layout_toRightOf="@id/imgJuego"
+            android:layout_marginLeft="8dp"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

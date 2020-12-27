@@ -15,32 +15,29 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.sixst06.fragmentos.R;
+import com.sixst06.fragmentos.gui.Administrar;
 import com.sixst06.fragmentos.model.Juego;
 
 import java.util.List;
 
-public class JuegosAdapter extends RecyclerView.Adapter<JuegosAdapter.ViewHolder> {
-
-    private List<Juego> juegos;
+public class AdministrarAdapter extends RecyclerView.Adapter<AdministrarAdapter.ViewHolder>{   private List<Juego> administraciones;
     private Context context;
 
-    public JuegosAdapter(List<Juego> juegos) {
-        this.juegos = juegos;
+    public AdministrarAdapter(List<Juego> administraciones) {
+        this.administraciones = administraciones;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_juego, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_mis_juegos, parent,false);
         context = parent.getContext();
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-
-        Juego administracion = juegos.get(position);
+        Juego administracion = administraciones.get(position);
         String imgUri = administracion.getImagen();
         RequestOptions options = new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
@@ -52,7 +49,8 @@ public class JuegosAdapter extends RecyclerView.Adapter<JuegosAdapter.ViewHolder
                 .placeholder(R.drawable.ic_good)
                 .error(R.drawable.ic_error)
                 .apply(options)
-                .into(holder.imgJuego);
+                .into(holder.imgAdministra);
+
         holder.txtTitulo.setText(administracion.getTitulo());
         holder.rbClasificacion.setRating(administracion.getClasificacion());
         holder.txtDescripcion.setText(administracion.getDescripcion());
@@ -60,19 +58,19 @@ public class JuegosAdapter extends RecyclerView.Adapter<JuegosAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return juegos.size();
+        return administraciones.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private View view;
-        private AppCompatImageView imgJuego;
+        private AppCompatImageView imgAdministra;
         private TextView txtTitulo;
         private AppCompatRatingBar rbClasificacion;
         private TextView txtDescripcion;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgJuego = itemView.findViewById(R.id.imgJuego);
+            imgAdministra = itemView.findViewById(R.id.imgJuego);
             txtTitulo = itemView.findViewById(R.id.txtTitulo);
             rbClasificacion = itemView.findViewById(R.id.rbClasificacion);
             txtDescripcion = itemView.findViewById(R.id.txtDescripcion);

@@ -47,8 +47,6 @@
                 android:textAlignment="center"
                 android:textAppearance="?attr/textAppearanceBody1"
                 android:id="@+id/txtDescripcion"/>
-
-
         </LinearLayout>
     </LinearLayout>
 

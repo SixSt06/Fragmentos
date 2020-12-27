@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 import dmax.dialog.SpotsDialog;
 
-public class MiscController {
+public class  MiscController {
     private static MiscController instance = null;
     public String actualFragment;
     private ProgressDialog progressDialog;

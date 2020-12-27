@@ -3,16 +3,16 @@ package com.sixst06.fragmentos.model;
 import java.util.Objects;
 
 public class Juego {
-    private int idJuego;
+    private String idJuego;
     private String imagen;
     private String titulo;
-    private int clasificacion;
+    private float clasificacion;
     private String descripcion;
 
     public Juego() {
     }
 
-    public Juego(int idJuego, String imagen, String titulo, int clasificacion, String descripcion) {
+    public Juego(String idJuego, String imagen, String titulo, float clasificacion, String descripcion) {
         this.idJuego = idJuego;
         this.imagen = imagen;
         this.titulo = titulo;
@@ -20,11 +20,11 @@ public class Juego {
         this.descripcion = descripcion;
     }
 
-    public int getIdJuego() {
+    public String getIdJuego() {
         return idJuego;
     }
 
-    public void setIdJuego(int idJuego) {
+    public void setIdJuego(String idJuego) {
         this.idJuego = idJuego;
     }
 
@@ -44,11 +44,11 @@ public class Juego {
         this.titulo = titulo;
     }
 
-    public int getClasificacion() {
+    public float getClasificacion() {
         return clasificacion;
     }
 
-    public void setClasificacion(int clasificacion) {
+    public void setClasificacion(float clasificacion) {
         this.clasificacion = clasificacion;
     }
 
@@ -65,7 +65,7 @@ public class Juego {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Juego juego = (Juego) o;
-        return idJuego == juego.idJuego;
+        return idJuego.equals(juego.idJuego);
     }
 
     @Override
